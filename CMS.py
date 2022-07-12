@@ -23,6 +23,7 @@ try:
     for i in l1:
         tempdf = pd.DataFrame(columns=columns)
         tempdf.loc[0] = i
+        # Change the below path accordingly to the environment to export the output.
         path = r'C:\Users\Ravikumar\Desktop\CMS\\'+tempdf['Author'][0]+'-'+str(tempdf['Created_On'][0].strftime("%B"))
         if i[2] == None:
             path+='-Draft-blogs.csv'

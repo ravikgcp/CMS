@@ -54,15 +54,23 @@ df.printSchema()
 df3 = spark.read.options(header='True', inferSchema='True', delimiter=',') \
   .csv("/tmp/resources/zipcodes.csv")
 
-df3.write.option("header",True) \
- .csv("/tmp/spark_output/zipcodes")
+
+df3.write.mode('overwrite').csv("/tmp/spark_output/zipcodes")
+//you can also use this
+df3.write.format("csv").mode('overwrite').save("/tmp/spark_output/zipcodes")
+
 
 ---------------
 
 
+spark.sql("CREATE OR REPLACE TEMPORARY VIEW zipcode USING json OPTIONS" + 
+      " (path 'resources/zipcodes.json')")
+spark.sql("select * from zipcode").show()
 
+or 
 
-
+dataframe.createOrReplaceTempView("people")
+spark.sql("select * from people").show()
 
 
 
